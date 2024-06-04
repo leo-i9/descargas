@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body{
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(25, 26, 26);
+    }
+    main{
+        user-select: none;
+        width: 50%;
+        background-color: rgb(68, 150, 226);
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 5px;
+        flex-direction: column;
+    }
+    header{
+        margin-bottom: 20px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        text-decoration: underline;
+    }
+    section{
+        width: 200px;
+        height: 100%;
+       display: flex;
+       flex-wrap: wrap;
+
+    }
+     header{
+        min-width: 100%;
+        text-align: center;
+     }
+   main section form{
+        min-width: 200px;
+        flex-grow: 1;
+        position: relative;
+        height: 50px;
+
+    
+    }
+    p{
+        
+        width: 100%;
+    }
+    section input{
+         width: 100%;
+         display:inline;
+         padding-top: 5px;
+         font-size: 16xpx;
+         background: #333;
+        color: #eee;
+        border-radius: 15px;
+        padding-left: 10px;
+        padding-bottom: 3px;
+        z-index: 10;
+        outline: none;
+    }
+
+.input:not(:placeholder-shown) + .label,
+.input:focus + .label {
+      transform: scale(0.7) translateY(-20px) translateX(-30px);
+      
+      user-select: none;
+
+    
+      
+     }
+     .label {
+        position: absolute;
+        left: 15%;
+        top: 2px;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: bolder;
+        
+        color:#eee;
+        transition: transform 0.3s;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+     }
+     .btns{
+        margin-top: 20px;
+        min-width: 100%;
+        text-align: center;
+       
+     }
+     .des{
+        border: 1px solid #222;
+        border-radius: 5px;
+        padding: 2px;
+        color: #eee;
+        text-transform: capitalize;
+        font-weight: bold;
+        background-color: rgb(4, 141, 4);
+
+     }
+     .des:active{
+        box-shadow: 0px 0px 10px #8a2fc2
+     }
+     @media(max-width:400px){
+        main{
+            width: 70%;
+        }
+     }
+</style>
+<body>
+    <main>
+        <header>
+         <h2>Descargador de musica</h2>
+        </header>
+        <section>
+         <form action="">
+            <input class="input" type="text" placeholder="">
+            <label class="label" for="">url</label>
+              <div class="btns">
+                 <button  class="des" type="submit">descargar</button>
+                 <select class="de" name="" id="">
+                    <option value="">ninguna</option>
+                    <option value="mp3">mp3</option>
+                    <option value="mp4">mp4</option>
+                 </select>
+            
+                </div>
+           
+         </form>
+
+         <p>
+            esto es una version de prueba que solo esta en local todos los video se descargan en puro video (estamos trabajando para tener mas tipos de modo)
+         </p>
+        </section>
+    </main>
+   <script>
+    const vale = document.querySelector(".input");
+   const btn=  document.querySelector(".des")
+    const vS = document.querySelector(".de")
+   btn.addEventListener("click",(e)=>{
+        e.preventDefault();
+        
+        if(vale.value!= ""){
+            console.log("hola")
+
+            if(vS.value=="" || vS.value=="mp3"){
+                const urlApi = `http://192.168.1.71:3000/polar/descargar3?url=${vale.value}`;
+            window.location.href = urlApi;
+            }else{
+                const urlApi = `http://192.168.1.71:3000/polar/descargar4?url=${vale.value}`;
+            window.location.href = urlApi;
+            }
+          
+        }
+    })
+   </script>
+</body>
+</html>
