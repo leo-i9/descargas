@@ -33,7 +33,7 @@ app.use("/polar",router)
 //   res.setHeader('Content-Disposition', 'attachment; filename="video.mp4"');
 //   video.pipe(res);
 // });
-const port = process.env.PORT ?? 3000;
+ export  const port = process.env.PORT ?? 3000;
 app.listen(port, function() {
   console.log('Aplicación escuchando en el puerto 3000!');
 });
