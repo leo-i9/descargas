@@ -1,6 +1,6 @@
 import express ,{Router} from 'express';
 import fs from 'fs';
-import { execPath } from 'process';
+//import { execPath, send } from 'process';
 import ytdl from'ytdl-core';
 const app = express();
 export const router = Router();
@@ -28,13 +28,22 @@ router.get('/descargar3',  async (req, res) => {
         res.status(400).send('URL inválida');
     }
 })
+
+router.get("/validar", async (req, res) => {
+    const url = req.query.url;
+    
+    if (ytdl.validateURL(url)) {
+      
+        res.send({valor:1})}
+        else{ res.send({valor:0})}
+})
 router.get('/descargar4',  async (req, res) => {
     const url = req.query.url;
     if (ytdl.validateURL(url)) {
         res.header('Content-Disposition', 'attachment; filename="video.mp4"');
         ytdl(url, { quality: 'highest' }).pipe(res);
     } else {
-        res.status(400).send('URL inválida');
+        res.status(400).send({error:"url invalida"});
     }
 })
 
