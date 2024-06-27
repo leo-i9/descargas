@@ -262,14 +262,14 @@ p{
 
    btn.addEventListener("click",async(e)=>{
         e.preventDefault();
-        
+        console.log(await octenerValidez(vale.value)==1)
         if(vale.value!= ""){
          
              if(await octenerValidez(vale.value)==1){
                 if(vS.value=="" || vS.value=="mp3"){
                 
-              
-                
+              console.log("e")
+                //https://descargas-z14j.onrender.com
                 const urlApi = `https://descargas-z14j.onrender.com/polar/descargar3?url=${vale.value}`;
                 window.location.href = urlApi;
                 
