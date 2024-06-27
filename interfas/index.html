@@ -212,10 +212,8 @@ p{
       if(typeof text == "string"){
     
        for(let i =17;i<text.length;i++){
-        console.log("deed")
-           if(text[i]== "?"){
-            console.log("deed")
-            console.log(text.substring(17,i))
+         if(text[i]== "?"){
+          
             return text.substring(17,i)
             break;
            }
@@ -224,7 +222,7 @@ p{
       }else return "esto no es un texto"
     }
   async function octenerValidez(text){
-    let t =await fetch(`http://localhost:3000/polar/validar?url=${text}`).then(e=>{
+    let t =await fetch(`https://descargas-z14j.onrender.com/polar/validar?url=${text}`).then(e=>{
         if(e.ok) return e.json()
     }).then(e=> e.valor )
     return  t
@@ -240,11 +238,11 @@ p{
     const ver = document.querySelector(".ver");
 
     vale.oninput= async function(e){
-    console.log(e.target.value)
+     
    let  t = await octenerValidez(e.target.value)
    
    if(t== 1){
-    console.log(min(e.target.value))
+   
     let html = `
      <a href="${e.target.value}">
           <img src="https://img.youtube.com/vi/${min(e.target.value)}/hqdefault.jpg" alt="">
@@ -272,7 +270,7 @@ p{
                 
               
                 
-                const urlApi = `http://localhost:3000/polar/descargar3?url=${vale.value}`;
+                const urlApi = `https://descargas-z14j.onrender.com/polar/descargar3?url=${vale.value}`;
                 window.location.href = urlApi;
                 
            
