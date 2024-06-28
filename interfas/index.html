@@ -206,18 +206,34 @@ p{
         </section>
     </main>
    <script>
+    //https://www.youtube.com/live/NFHuejQN780?si=_CX24QWBtkMtuObw
+    //https://www.youtube.com/live/iaYdAU2z5qs?si=95ClEb_JCwCr4UY-
+    //https://youtu.be/kCiY3xBw5Sk?si=FK_dnRR4E5T-9aJL
     let vr="https://youtu.be/E5DlpONIW5M?si=cv5u135rMH2F6MN3"
     
     function min(text){
       if(typeof text == "string"){
     
-       for(let i =17;i<text.length;i++){
+
+        if(text[16] == "/"){
+            for(let i =19;i<text.length;i++){
          if(text[i]== "?"){
           
             return text.substring(17,i)
             break;
            }
        }
+        }else if(text[29] == "/"){
+            for(let i =29;i<text.length;i++){
+         if(text[i]== "?"){
+          
+            return text.substring(29,i)
+            break;
+           }
+       }
+        }
+
+     
 
       }else return "esto no es un texto"
     }
