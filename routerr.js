@@ -17,6 +17,8 @@ router.use((req, res, next) => {
   });
 router.get('/descargar3',  async (req, res) => {
     const url = req.query.url;
+    try{
+    
     if (ytdl.validateURL(url)) {
         res.header('Content-Disposition', 'attachment; filename="audio.mp3"');
         const video = ytdl(url, { quality: 'highestaudio' });
@@ -27,24 +29,34 @@ router.get('/descargar3',  async (req, res) => {
     } else {
         res.status(400).send('URL inválida');
     }
+    }catch(e){
+        console.log(e)
+        res.status(404).send("URL invalida")
+    }
 })
 
 router.get("/validar", async (req, res) => {
     const url = req.query.url;
     
-    if (ytdl.validateURL(url)) {
+    try{  if (ytdl.validateURL(url)) {
       
         res.send({valor:1})}
-        else{ res.send({valor:0})}
+        else{ res.send({valor:0})}}catch(e){
+
+        }
+  
 })
 router.get('/descargar4',  async (req, res) => {
     const url = req.query.url;
-    if (ytdl.validateURL(url)) {
+    try{ if (ytdl.validateURL(url)) {
         res.header('Content-Disposition', 'attachment; filename="video.mp4"');
         ytdl(url, { quality: 'highest' }).pipe(res);
     } else {
         res.status(400).send({error:"url invalida"});
+    }}catch(e){
+        res.status(400).send({error:"url invalida"});
     }
+   
 })
 
 router.get("/p",(req, res)=>{
