@@ -210,7 +210,7 @@ p{
     //https://www.youtube.com/live/iaYdAU2z5qs?si=95ClEb_JCwCr4UY-
     //https://youtu.be/kCiY3xBw5Sk?si=FK_dnRR4E5T-9aJL
     let vr="https://youtu.be/E5DlpONIW5M?si=cv5u135rMH2F6MN3"
-    
+let t =1
     function min(text){
       if(typeof text == "string"){
     
@@ -237,12 +237,7 @@ p{
 
       }else return "esto no es un texto"
     }
-  async function octenerValidez(text){
-    let t =await fetch(`https://descargas-ap5c.onrender.com/polar/validar?url=${text}`).then(e=>{
-        if(e.ok) return e.json()
-    }).then(e=> e.valor )
-    return  t
-   }
+
    
 
     min(vr)
@@ -255,7 +250,7 @@ p{
 
     vale.oninput= async function(e){
      
-   let  t = await octenerValidez(e.target.value)
+  
    
    if(t== 1){
    
@@ -278,26 +273,26 @@ p{
 
    btn.addEventListener("click",async(e)=>{
         e.preventDefault();
-        console.log(await octenerValidez(vale.value)==1)
+      
         if(vale.value!= ""){
          
-             if(await octenerValidez(vale.value)==1){
+            
                 if(vS.value=="" || vS.value=="mp3"){
                 
               console.log("e")
-                //https://descargas-z14j.onrender.com
-                const urlApi = `https://descargas-ap5c.onrender.com/polar/descargar3?url=${vale.value}`;
+                //http://localhost:3000/main/
+                const urlApi = `http://localhost:4000/download?videoUrl=${vale.value}`;
                 window.location.href = urlApi;
                 
            
             }else{
                
-            const urlApi = `https://descargas-ap5c.onrender.com/polar/descargar4?url=${vale.value}`;
-            window.location.href = urlApi;
+            // const urlApi = `http://localhost:3000/polar/mejoras?url=${vale.value}`;
+            // window.location.href = urlApi;
                 
            
             }
-             }
+             
            
           
         }
