@@ -3,8 +3,8 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import path from "path"
 import play from 'play-dl';
-import fs from 'fs';
 
+import ffmpeg from 'fluent-ffmpeg';
 import ytdl from '@distube/ytdl-core';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -41,34 +41,34 @@ app.get('/main', (req, res) => {
 
 app.get('/download', async (req, res) => {
   const videoUrl = req.query.videoUrl;
+  const output = 'video.mp4';
 
   if (!videoUrl) {
     return res.status(400).send('URL del video es requerida');
   }
 
-  try {
-    const videoStream = ytdl(videoUrl);
+try {
+  const videoStream = ytdl(videoUrl);
 
-    res.setHeader('Content-Disposition', 'attachment; filename="video.mp4"');
-    res.setHeader('Content-Type', 'video/mp4');
+  res.setHeader('Content-Disposition', 'attachment; filename="video.mp4"');
+  res.setHeader('Content-Type', 'video/mp4');
 
-    req.on('close', () => {
-      console.log('Solicitud abortada por el cliente');
-      videoStream.destroy();
+  req.on('close', () => {
+    console.log('Solicitud abortada por el cliente');
+    videoStream.destroy();
+  });
+
+  videoStream.pipe(res)
+    .on('finish', () => {
+      console.log('Descarga completada');
+    }) .on('error', (err) => {
+      console.error('Error durante la descarga:', err);
+      res.status(500).send('Error durante la descarga');
     });
-
-    videoStream.pipe(res)
-      .on('finish', () => {
-        console.log('Descarga completada');
-      })
-      .on('error', (err) => {
-        console.error('Error durante la descarga:', err);
-        res.status(500).send('Error durante la descarga');
-      });
-  } catch (err) {
-    console.error('Error:', err);
-    res.status(500).send('Error al procesar la solicitud');
-  }
+} catch (err) {
+  console.error('Error:', err);
+  res.status(500).send('Error al procesar la solicitud');
+}
 });
 
   const port = process.env.PORT ?? 4000;
